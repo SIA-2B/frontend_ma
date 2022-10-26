@@ -49,36 +49,35 @@ const Home = (props) => {
 		return <Text>Fetching data...</Text>;
 	}
 	return (
-		<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-			<Text style={{ color: "#000000", fontSize: 20 }}>Home Screen!</Text>
-			{/* <Ionicons name="ios-home" size={80} color="#000000" /> */}
-			<FlatList
-				data={data.allGrades}
-				renderItem={({ item }) => <GradeItem grade={item} />}
-				keyExtractor={(item, index) => index}
-			/>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={{ color: "#000000", fontSize: 20 }}>Home Screen!</Text>
+      {/* <Ionicons name="ios-home" size={80} color="#000000" /> */}
+      <FlatList
+        data={data.allGrades}
+        renderItem={({ item }) => <GradeItem grade={item} />}
+        keyExtractor={(item, index) => index}
+      />
 
-			<TextInput
-				style={styles.input}
-				placeholder="Enter your username"
-				value={input}
-				onChangeText={(value) => setInput(value)}
-			/>
-			<TextInput
-				style={styles.input}
-				placeholder="Enter your password"
-				value={input}
-				onChangeText={(value) => setInput(value)}
-			/>
-			<Button
-				style={styles.button}
-				title="Login"
-				color="#000"
-				onPress={() => props.navigation.navigate("User", { username: input })}
-			/>
-			
-		</View>
-	);
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your username"
+        username={input}
+        onChangeText={(value) => setInput(value)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your password"
+        value={""}
+        onChangeText={(value) => setInput(value)}
+      />
+      <Button
+        style={styles.button}
+        title="Login"
+        color="#000"
+        onPress={() => props.navigation.navigate("User", { username: input })}
+      />
+    </View>
+  );
 };
 
 const HeaderButtonComponent = (props) => (
@@ -92,17 +91,22 @@ const HeaderButtonComponent = (props) => (
 
 Home.navigationOptions = (navData) => {
 	return {
-		headerTitle: "Sistema de servicios academicos",
-		headerRight: () => (
-			<HeaderButtons HeaderButtonComponent={HeaderButtonComponent}>
-				<Item
-					title="Setting"
-					iconName="ios-settings-outline"
-					onPress={() => navData.navigation.navigate("Setting")}
-				/>
-			</HeaderButtons>
-		),
-	};
+    headerTitle: "SIA UNAL",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButtonComponent}>
+        <Item
+          title="User"
+          iconName="person-outline"
+          onPress={() => navData.navigation.navigate("User")}
+        />
+        <Item
+          title="Setting"
+          iconName="ios-settings-outline"
+          onPress={() => navData.navigation.navigate("Setting")}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 export default Home;

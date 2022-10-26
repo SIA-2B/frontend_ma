@@ -9,7 +9,7 @@ import SettingScreen from "./screens/SettingScreen";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'http://4446-179-1-94-35.ngrok.io/graphql',
+  uri: 'http://67d9-200-118-61-100.ngrok.io/graphql',
   cache: new InMemoryCache()
 });
 
