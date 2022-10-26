@@ -19,36 +19,36 @@ import {
 } from "react-navigation-header-buttons";
 
 const Home = (props) => {
-	const [input, setInput] = useState("");
-	const { data, loading } = useQuery(GRADE_QUERY);
+  const [input, setInput] = useState("");
+  const { data, loading } = useQuery(GRADE_QUERY);
 
-	const styles = StyleSheet.create({
-		input: {
-		  height: 40,
-		  borderWidth: 1,
-		  margin: 2,
-		  padding: 10,
-		  borderRadius: 20,
-		},
-		button: {
-			backgroundColor: "#000000",
-			color: "white",
-		}
-	  });
+  const styles = StyleSheet.create({
+    input: {
+      height: 40,
+      borderWidth: 1,
+      margin: 2,
+      padding: 10,
+      borderRadius: 20,
+    },
+    button: {
+      backgroundColor: "#000000",
+      color: "white",
+    },
+  });
 
-	const GradeItem = ({ grade }) => {
-		const { courseName, gradeFinal } = grade;
+  const GradeItem = ({ grade }) => {
+    const { courseName, gradeFinal } = grade;
 
-		return (
-			<Pressable>
-				<Text>{courseName}</Text>
-			</Pressable>
-		);
-	};
-	if (loading) {
-		return <Text>Fetching data...</Text>;
-	}
-	return (
+    return (
+      <Pressable>
+        <Text>{courseName}</Text>
+      </Pressable>
+    );
+  };
+  if (loading) {
+    return <Text>Fetching data...</Text>;
+  }
+  return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text style={{ color: "#000000", fontSize: 20 }}>Home Screen!</Text>
       {/* <Ionicons name="ios-home" size={80} color="#000000" /> */}
@@ -81,17 +81,26 @@ const Home = (props) => {
 };
 
 const HeaderButtonComponent = (props) => (
-	<HeaderButton
-		IconComponent={Ionicons}
-		iconSize={23}
-		color="#FFFFFF"
-		{...props}
-	/>
+  <HeaderButton
+    IconComponent={Ionicons}
+    iconSize={23}
+    color="#FFFFFF"
+    {...props}
+  />
 );
 
 Home.navigationOptions = (navData) => {
-	return {
+  return {
     headerTitle: "SIA UNAL",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButtonComponent}>
+        <Item
+          title="Lat-menu"
+          iconName="menu-outline"
+          onPress={() => navData.navigation.navigate("Lat-menu")}
+        />
+      </HeaderButtons>
+    ),
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButtonComponent}>
         <Item
