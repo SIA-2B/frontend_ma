@@ -7,12 +7,17 @@ import {
   FlatList,
   Pressable,
   StyleSheet,
+  Image,
+  ImageBackground,
   TouchableHighlight,
+  ScrollView,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
 import { GRADE_QUERY } from "../gql/Query";
+import logoUnal from "../images/logoUnal.png";
+import welcome from "../images/welcome.jpg";
 import {
   Item,
   HeaderButton,
@@ -58,53 +63,58 @@ const Home = (props) => {
   }
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ color: "#000000", fontSize: 20 }}>Home Screen!</Text>
-      {/* <Ionicons name="ios-home" size={80} color="#000000" /> */}
+      <View
+        style={{
+          backgroundColor: "black",
+          marginTop: 40,
+          marginHorizontal: 10,
+          borderRadius: 20,
+        }}
+      >
+        <Image
+          style={{
+            marginHorizontal: 40,
+            marginVertical: 40,
+          }}
+          source={logoUnal}
+        />
+        <Text
+          style={{
+            color: "white",
+            textAlign: "center",
+            marginVertical: 20,
+            marginHorizontal: 30,
+            fontSize: 26,
+          }}
+        >
+          Bienvenido al Sistema de Información Académica
+        </Text>
+      </View>
+      <View
+        style={{
+          backgroundColor: "black",
+          marginVertical: 20,
+          marginHorizontal: 10,
+          borderRadius: 20,
+        }}
+      >
+        <Image
+          style={{
+            alignContent: "center",
+            marginHorizontal: 10,
+            marginVertical: 10,
+            width: 300,
+            height: 250,
+            borderRadius: 10,
+          }}
+          source={welcome}
+        />
+      </View>
       <FlatList
         data={data.allGrades}
         renderItem={({ item }) => <GradeItem grade={item} />}
         keyExtractor={(item, index) => index}
       />
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() => props.navigation.navigate("PersonalInfo")} //No olvidar añadir en App.js
-      >
-        <Text style={{ color: "white", padding: 10 }}>Datos Personales</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() => props.navigation.navigate("AcademicInfo")}
-      >
-        <Text style={{ color: "white", padding: 10 }}>Historia Académica</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() =>
-          props.navigation.navigate("inscriptions", { username: input })
-        }
-      >
-        <Text style={{ color: "white", padding: 10 }}>Inscripciones</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() =>
-          props.navigation.navigate("courses", { username: input })
-        }
-      >
-        <Text style={{ color: "white", padding: 10 }}>Buscador de Cursos</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() =>
-          props.navigation.navigate("financial", { username: input })
-        }
-      >
-        <Text style={{ color: "white", padding: 10 }}>Área Financiera</Text>
-      </Pressable>
     </View>
   );
 };
@@ -124,9 +134,9 @@ Home.navigationOptions = (navData) => {
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButtonComponent}>
         <Item
-          title="Lat-menu"
+          title="Menu"
           iconName="menu-outline"
-          onPress={() => navData.navigation.navigate("Lat-menu")}
+          onPress={() => navData.navigation.navigate("Menu")}
         />
       </HeaderButtons>
     ),

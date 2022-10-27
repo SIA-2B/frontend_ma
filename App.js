@@ -8,6 +8,7 @@ import UserScreen from "./screens/UserScreen";
 import SettingScreen from "./screens/SettingScreen";
 import PersonalInfoScreen from "./screens/PersonalInfoScreen";
 import AcademicInfoScreen from "./screens/AcademicInfoScreen";
+import MenuScreen from "./screens/MenuScreen";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -18,6 +19,7 @@ const client = new ApolloClient({
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
+    Menu: MenuScreen,
     User: UserScreen,
     Setting: SettingScreen,
     PersonalInfo: PersonalInfoScreen,
