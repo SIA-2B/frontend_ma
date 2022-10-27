@@ -6,34 +6,38 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import HomeScreen from "./screens/HomeScreen";
 import UserScreen from "./screens/UserScreen";
 import SettingScreen from "./screens/SettingScreen";
+import PersonalInfoScreen from "./screens/PersonalInfoScreen";
+import AcademicInfoScreen from "./screens/AcademicInfoScreen";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'http://67d9-200-118-61-100.ngrok.io/graphql',
-  cache: new InMemoryCache()
+  uri: "http://d751-200-118-61-100.ngrok.io/graphql",
+  cache: new InMemoryCache(),
 });
 
 const AppNavigator = createStackNavigator(
-{
-	Home: HomeScreen,
-	User: UserScreen,
-	Setting: SettingScreen,
-},
-{
-	defaultNavigationOptions: {
-	headerStyle: {
-		backgroundColor: "#000000",
-	},
-	headerTitleStyle: {
-		fontWeight: "bold",
-		color: "#FFF",
-	},
-	headerTintColor: "#FFF",
-	},
-},
-{
-	initialRouteName: "Home",
-}
+  {
+    Home: HomeScreen,
+    User: UserScreen,
+    Setting: SettingScreen,
+    PersonalInfo: PersonalInfoScreen,
+    AcademicInfo: AcademicInfoScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#000000",
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "#FFF",
+      },
+      headerTintColor: "#FFF",
+    },
+  },
+  {
+    initialRouteName: "Home",
+  }
 );
 
 const Navigator = createAppContainer(AppNavigator);
