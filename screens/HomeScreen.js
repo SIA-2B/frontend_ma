@@ -1,3 +1,4 @@
+//PANTALLA PRINCIPAL
 import React, { useState } from "react";
 import {
   Text,
@@ -15,7 +16,7 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
-import { GRADE_QUERY } from "../gql/Query";
+import { GRADE_QUERY } from "../gql/GradesQuery";
 import logoUnal from "../images/logoUnal.png";
 import welcome from "../images/welcome.jpg";
 import {
@@ -25,13 +26,12 @@ import {
 } from "react-navigation-header-buttons";
 
 const Home = (props) => {
-  const [input, setInput] = useState("");
-
-  let { data, loading } = useQuery(GRADE_QUERY);
-
-  if (data === undefined) {
-    data = "";
-  }
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false,
+  });
 
   const styles = StyleSheet.create({
     input: {
@@ -41,31 +41,40 @@ const Home = (props) => {
       padding: 10,
       borderRadius: 20,
     },
-    button: {
+    username: {
+      height: 40,
+      width: 250,
+      borderWidth: 1,
+      marginTop: 10,
+      margin: 15,
+      padding: 10,
       borderRadius: 10,
-      backgroundColor: "#000000",
-      marginVertical: 20,
+      borderColor: "#3c3d3d",
+    },
+    password: {
+      height: 40,
+      width: 250,
+      borderWidth: 1,
+      margin: 15,
+      padding: 10,
+      borderRadius: 10,
+      borderColor: "#3c3d3d",
+    },
+    button: {
+      width:100,
+      backgroundColor: "#3c3d3d",
+      borderRadius: 10,
       color: "white",
+      alignItems: "center",
+      margin: 15,
     },
   });
 
-  const GradeItem = ({ grade }) => {
-    const { courseName, gradeFinal } = grade;
-
-    return (
-      <Pressable>
-        <Text>{courseName}</Text>
-      </Pressable>
-    );
-  };
-  if (loading) {
-    return <Text>Fetching data...</Text>;
-  }
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View
         style={{
-          backgroundColor: "black",
+          backgroundColor: "#76232f",
           marginTop: 40,
           marginHorizontal: 10,
           borderRadius: 20,
@@ -90,31 +99,38 @@ const Home = (props) => {
           Bienvenido al Sistema de Información Académica
         </Text>
       </View>
-      <View
-        style={{
-          backgroundColor: "black",
-          marginVertical: 20,
-          marginHorizontal: 10,
-          borderRadius: 20,
-        }}
-      >
-        <Image
-          style={{
-            alignContent: "center",
-            marginHorizontal: 10,
-            marginVertical: 10,
-            width: 300,
-            height: 250,
-            borderRadius: 10,
-          }}
-          source={welcome}
-        />
-      </View>
-      <FlatList
-        data={data.allGrades}
-        renderItem={({ item }) => <GradeItem grade={item} />}
-        keyExtractor={(item, index) => index}
-      />
+      <View style={{ alignItems: "center", marginHorizontal: 100, marginVertical: 50 }}>
+          <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>Usuario:</Text>     
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              style={styles.username}
+              placeholder="Usuario"
+              username={username}
+              onChangeText={(value) => setUsername(value)}
+            />
+          </View>
+          <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
+            Contraseña:
+          </Text>
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              style={styles.password}
+              placeholder="Contraseña"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+            />
+          </View>
+
+          <Pressable //Nos sirve para desestilizar un componente de react
+            style={styles.button}
+            onPress={() =>
+              props.navigation.navigate("Menu", { username: username })
+            }
+          >
+            <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
+          </Pressable>
+        </View>
     </View>
   );
 };

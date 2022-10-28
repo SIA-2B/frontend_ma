@@ -9,6 +9,7 @@ import SettingScreen from "./screens/SettingScreen";
 import PersonalInfoScreen from "./screens/PersonalInfoScreen";
 import AcademicInfoScreen from "./screens/AcademicInfoScreen";
 import MenuScreen from "./screens/MenuScreen";
+import GradesScreen from "./screens/GradesScreen";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -24,11 +25,12 @@ const AppNavigator = createStackNavigator(
     Setting: SettingScreen,
     PersonalInfo: PersonalInfoScreen,
     AcademicInfo: AcademicInfoScreen,
+    Grades: GradesScreen,
   },
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: "#000000",
+        backgroundColor: "#76232f",
       },
       headerTitleStyle: {
         fontWeight: "bold",
