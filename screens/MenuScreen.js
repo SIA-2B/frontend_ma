@@ -29,7 +29,7 @@ const Menu = (props) => {
     },
     button: {
       borderRadius: 10,
-      backgroundColor: "#000000",
+      backgroundColor: "#3c3d3d",
       marginVertical: 20,
       color: "white",
     },
@@ -77,6 +77,13 @@ const Menu = (props) => {
         }
       >
         <Text style={{ color: "white", padding: 10 }}>Área Financiera</Text>
+      </Pressable>
+
+      <Pressable //Nos sirve para desestilizar un componente de react
+        style={styles.button}
+        onPress={() => props.navigation.navigate("Grades")}
+      >
+        <Text style={{ color: "white", padding: 10 }}>Calificaciones</Text>
       </Pressable>
     </View>
   );

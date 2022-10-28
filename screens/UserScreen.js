@@ -17,7 +17,7 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
-import { GRADE_QUERY } from "../gql/Query";
+import { GRADE_QUERY } from "../gql/GradesQuery";
 
 const User = (props) => {
   const [username, setUsername] = useState("");
