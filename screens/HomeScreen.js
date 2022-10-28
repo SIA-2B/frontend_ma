@@ -61,7 +61,7 @@ const Home = (props) => {
       borderColor: "#3c3d3d",
     },
     button: {
-      width:100,
+      width: 100,
       backgroundColor: "#3c3d3d",
       borderRadius: 10,
       color: "white",
@@ -99,38 +99,46 @@ const Home = (props) => {
           Bienvenido al Sistema de Información Académica
         </Text>
       </View>
-      <View style={{ alignItems: "center", marginHorizontal: 100, marginVertical: 50 }}>
-          <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>Usuario:</Text>     
-          <View style={{ alignItems: "center" }}>
-            <TextInput
-              style={styles.username}
-              placeholder="Usuario"
-              username={username}
-              onChangeText={(value) => setUsername(value)}
-            />
-          </View>
-          <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
-            Contraseña:
-          </Text>
-          <View style={{ alignItems: "center" }}>
-            <TextInput
-              style={styles.password}
-              placeholder="Contraseña"
-              secureTextEntry={true}
-              value={password}
-              onChangeText={(value) => setPassword(value)}
-            />
-          </View>
-
-          <Pressable //Nos sirve para desestilizar un componente de react
-            style={styles.button}
-            onPress={() =>
-              props.navigation.navigate("Menu", { username: username })
-            }
-          >
-            <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
-          </Pressable>
+      <View
+        style={{
+          alignItems: "center",
+          marginHorizontal: 100,
+          marginVertical: 50,
+        }}
+      >
+        <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
+          Usuario:
+        </Text>
+        <View style={{ alignItems: "center" }}>
+          <TextInput
+            style={styles.username}
+            placeholder="Usuario"
+            username={username}
+            onChangeText={(value) => setUsername(value)}
+          />
         </View>
+        <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
+          Contraseña:
+        </Text>
+        <View style={{ alignItems: "center" }}>
+          <TextInput
+            style={styles.password}
+            placeholder="Contraseña"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+          />
+        </View>
+
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() =>
+            props.navigation.navigate("Menu", { username: username })
+          }
+        >
+          <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -159,10 +167,11 @@ Home.navigationOptions = (navData) => {
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButtonComponent}>
         <Item
-          title="User"
+          title="PersonalInfo"
           iconName="person-outline"
-          onPress={() => navData.navigation.navigate("User")}
+          onPress={() => navData.navigation.navigate("PersonalInfo")}
         />
+
         <Item
           title="Setting"
           iconName="ios-settings-outline"
