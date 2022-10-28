@@ -4,7 +4,6 @@ import { createStackNavigator } from "react-navigation-stack";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import HomeScreen from "./screens/HomeScreen";
-import UserScreen from "./screens/UserScreen";
 import SettingScreen from "./screens/SettingScreen";
 import PersonalInfoScreen from "./screens/PersonalInfoScreen";
 import AcademicInfoScreen from "./screens/AcademicInfoScreen";
@@ -21,7 +20,6 @@ const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Menu: MenuScreen,
-    User: UserScreen,
     Setting: SettingScreen,
     PersonalInfo: PersonalInfoScreen,
     AcademicInfo: AcademicInfoScreen,

@@ -11,11 +11,13 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
-import { GRADE_QUERY } from "../gql/GradesQuery";
+import { ACADEMIC_STUDENT } from "../gql/AcademicQuery";
 
 const AcademicInfo = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  const  = useState("");
+  const { data, loading } = useQuery(ACADEMIC_STUDENT("6"));
+  
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,

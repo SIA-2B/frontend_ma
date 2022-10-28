@@ -1,37 +1,42 @@
-//PANTALLA PRINCIPAL
 import React, { useState } from "react";
 import {
   Text,
   View,
   TextInput,
-  Button,
-  FlatList,
   Pressable,
   StyleSheet,
   Image,
-  ImageBackground,
-  TouchableHighlight,
   ScrollView,
 } from "react-native";
-
 import { Ionicons } from "@expo/vector-icons";
-import { useQuery } from "@apollo/client";
-import { GRADE_QUERY } from "../gql/GradesQuery";
+import { useQuery, useMutation } from "@apollo/client";
 import logoUnal from "../images/logoUnal.png";
-import welcome from "../images/welcome.jpg";
 import {
   Item,
   HeaderButton,
   HeaderButtons,
 } from "react-navigation-header-buttons";
+import { AUTH_QUERY } from "../gql/AuthQuery";
 
 const Home = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
-  });
+
+  const { data, loading } = useMutation(AUTH_QUERY);
+
+  const AuthItem = ({ oToken }) => {
+    const { token } = oToken;
+
+    return (
+      <Pressable>
+        <Text>token: {token}</Text>
+      </Pressable>
+    );
+  };
+
+  if (loading) {
+    return <Text>Fetching data...</Text>;
+  }
 
   const styles = StyleSheet.create({
     input: {
@@ -71,75 +76,79 @@ const Home = (props) => {
   });
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <View
-        style={{
-          backgroundColor: "#76232f",
-          marginTop: 40,
-          marginHorizontal: 10,
-          borderRadius: 20,
-        }}
-      >
-        <Image
+    <ScrollView>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <View
           style={{
-            marginHorizontal: 40,
-            marginVertical: 40,
-          }}
-          source={logoUnal}
-        />
-        <Text
-          style={{
-            color: "white",
-            textAlign: "center",
-            marginVertical: 20,
-            marginHorizontal: 30,
-            fontSize: 26,
+            backgroundColor: "#76232f",
+            marginTop: 20,
+            marginHorizontal: 10,
+            borderRadius: 20,
           }}
         >
-          Bienvenido al Sistema de Información Académica
-        </Text>
-      </View>
-      <View
-        style={{
-          alignItems: "center",
-          marginHorizontal: 100,
-          marginVertical: 50,
-        }}
-      >
-        <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
-          Usuario:
-        </Text>
-        <View style={{ alignItems: "center" }}>
-          <TextInput
-            style={styles.username}
-            placeholder="Usuario"
-            username={username}
-            onChangeText={(value) => setUsername(value)}
+          <Image
+            style={{
+              marginHorizontal: 40,
+              marginVertical: 40,
+            }}
+            source={logoUnal}
           />
+          <Text
+            style={{
+              color: "white",
+              textAlign: "center",
+              marginVertical: 20,
+              marginHorizontal: 30,
+              fontSize: 26,
+            }}
+          >
+            Bienvenido al Sistema de Información Académica
+          </Text>
         </View>
-        <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
-          Contraseña:
-        </Text>
-        <View style={{ alignItems: "center" }}>
-          <TextInput
-            style={styles.password}
-            placeholder="Contraseña"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={(value) => setPassword(value)}
-          />
-        </View>
+        <View
+          style={{
+            alignItems: "center",
+            marginHorizontal: 100,
+            marginVertical: 50,
+          }}
+        >
+          <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
+            Usuario:
+          </Text>
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              style={styles.username}
+              placeholder="Usuario"
+              username={username}
+              onChangeText={(value) => setUsername(value)}
+            />
+          </View>
+          <Text style={{ color: "#3c3d3d", fontSize: 15, textAlign: "left" }}>
+            Contraseña:
+          </Text>
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              style={styles.password}
+              placeholder="Contraseña"
+              secureTextEntry={true}
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+            />
+          </View>
 
-        <Pressable //Nos sirve para desestilizar un componente de react
-          style={styles.button}
-          onPress={() =>
-            props.navigation.navigate("Menu", { username: username })
-          }
-        >
-          <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
-        </Pressable>
+          <Pressable //Nos sirve para desestilizar un componente de react
+            style={styles.button}
+            onPress={() =>
+              props.navigation.navigate("Menu", { username: username })
+            }
+          >
+            <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
+          </Pressable>
+
+          <Text></Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
