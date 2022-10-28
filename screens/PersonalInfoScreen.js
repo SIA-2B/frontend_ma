@@ -21,14 +21,30 @@ const PersonalInfo = (props) => {
     showPassword: false,
   });
 
-  const styles = StyleSheet.create({
-    
-  });
+  const PersonalItem = ({ grade }) => {
+    const { courseName, gradeFinal } = grade;
+
+    return (
+      <Pressable>
+        <Text>{courseName}</Text>
+      </Pressable>
+    );
+  };
+  if (loading) {
+    return <Text>Fetching data...</Text>;
+  }
+
+  const styles = StyleSheet.create({});
 
   return (
     //Pantalla central...
     <View style={{ flex: 1 }}>
       <Text>PersonalInfoooo</Text>
+      <FlatList
+        data={data.allGrades}
+        renderItem={({ item }) => <GradeItem grade={item} />}
+        keyExtractor={(item, index) => index}
+      />
     </View>
   );
 };

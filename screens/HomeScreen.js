@@ -33,14 +33,6 @@ const Home = (props) => {
     showPassword: false,
   });
 
-  const [input, setInput] = useState("");
-
-  let { data, loading } = useQuery(GRADE_QUERY);
-
-  if (data === undefined) {
-    data = "";
-  }
-
   const styles = StyleSheet.create({
     input: {
       height: 40,
@@ -78,18 +70,6 @@ const Home = (props) => {
     },
   });
 
-  const GradeItem = ({ grade }) => {
-    const { courseName, gradeFinal } = grade;
-
-    return (
-      <Pressable>
-        <Text>{courseName}</Text>
-      </Pressable>
-    );
-  };
-  if (loading) {
-    return <Text>Fetching data...</Text>;
-  }
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View

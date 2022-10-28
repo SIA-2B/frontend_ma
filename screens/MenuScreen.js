@@ -54,6 +54,13 @@ const Menu = (props) => {
 
       <Pressable //Nos sirve para desestilizar un componente de react
         style={styles.button}
+        onPress={() => props.navigation.navigate("Grades")}
+      >
+        <Text style={{ color: "white", padding: 10 }}>Calificaciones</Text>
+      </Pressable>
+
+      <Pressable //Nos sirve para desestilizar un componente de react
+        style={styles.button}
         onPress={() =>
           props.navigation.navigate("inscriptions", { username: input })
         }
