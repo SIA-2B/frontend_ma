@@ -12,7 +12,7 @@ import MenuScreen from "./screens/MenuScreen";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "http://d751-200-118-61-100.ngrok.io/graphql",
+  uri: "http://4ce7-200-118-61-100.ngrok.io/graphql",
   cache: new InMemoryCache(),
 });
 

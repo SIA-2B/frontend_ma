@@ -26,7 +26,7 @@ const AcademicInfo = (props) => {
   return (
     //Pantalla central...
     <View style={{ flex: 1 }}>
-      <Text>AcademicInfooooooooo</Text>
+      <Text>AcademicInfo</Text>
     </View>
   );
 };
