@@ -1,10 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const AUTH_QUERY = gql`
-  query Auth {
-    allGrades {
-      courseName
-      gradeFinal
+  mutation {
+    createAuth(auth: { username: "developer", password: "developer" }) {
+      token
     }
   }
 `;
