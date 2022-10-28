@@ -40,13 +40,6 @@ const Menu = (props) => {
       <Text style={{ color: "#000000", fontSize: 20 }}>MENÚ PRINCIPAL</Text>
       <Pressable //Nos sirve para desestilizar un componente de react
         style={styles.button}
-        onPress={() => props.navigation.navigate("PersonalInfo")} //No olvidar añadir en App.js
-      >
-        <Text style={{ color: "white", padding: 10 }}>Datos Personales</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
         onPress={() => props.navigation.navigate("AcademicInfo")}
       >
         <Text style={{ color: "white", padding: 10 }}>Historia Académica</Text>

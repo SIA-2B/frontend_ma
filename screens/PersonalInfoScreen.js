@@ -11,25 +11,72 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
-import { GRADE_QUERY } from "../gql/GradesQuery";
+import { PERSONALINFO_QUERY } from "../gql/PersonalInfoQuery";
 
 const PersonalInfo = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
-  });
+  const [username, setUsername] = props. useState("");
+  const { data, loading } = useQuery(PERSONALINFO_QUERY);
 
-  const PersonalItem = ({ grade }) => {
-    const { courseName, gradeFinal } = grade;
+  const PersonalItem = ({ persona }) => {
+    const {
+      idPersona,
+      nombrePersona,
+      apellidoPersona,
+      tipoDocumento,
+      NUIPPersona,
+      usernamePersona,
+      lugarNacimiento,
+      estadoCivil,
+      sexoBio,
+      etnia,
+      correoPersonal,
+      telefonoMovil,
+      telefonoFijo,
+      fechaNacimiento,
+      EPS,
+      grupoSangre,
+      factorRH,
+      dirResidencia,
+      lugarResidencia,
+      estratoSocioeconomico,
+      libretaMilitar,
+      estadoPersona,
+    } = persona;
 
-    return (
-      <Pressable>
-        <Text>{courseName}</Text>
-      </Pressable>
-    );
+    if (usernamePersona === "developer") {
+      return (
+        <Pressable>
+          <Text>TIUN: {idPersona}</Text>
+          <Text>Nombres: {nombrePersona}</Text>
+          <Text>Apellidos: {apellidoPersona}</Text>
+          <Text>
+            Documento: {tipoDocumento} {NUIPPersona}
+          </Text>
+          <Text>Username: {usernamePersona}</Text>
+          <Text>Lugar de Nacimiento: {lugarNacimiento}</Text>
+          <Text>Estado Civil: {estadoCivil}</Text>
+          <Text>Sexo: {sexoBio}</Text>
+          <Text>Etnia: {etnia}</Text>
+          <Text>Correo Personal: {correoPersonal}</Text>
+          <Text>Teléfono Movil: {telefonoMovil}</Text>
+          <Text>Teléfono Fijo: {telefonoFijo}</Text>
+          <Text>Fecha de Nacimiento: {fechaNacimiento}</Text>
+          <Text>EPS: {EPS}</Text>
+          <Text>
+            Grupo Sangüíneo: {grupoSangre} {factorRH}
+          </Text>
+          <Text>Dirección de Residencia: {dirResidencia}</Text>
+          <Text>Lugar de Residencia: {lugarResidencia}</Text>
+          <Text>Estrato Social: {estratoSocioeconomico}</Text>
+          <Text>Libreta Militar: {libretaMilitar.toString()}</Text>
+          <Text>Estado Persona: {estadoPersona.toString()}</Text>
+        </Pressable>
+      );
+    } else {
+      return;
+    }
   };
+
   if (loading) {
     return <Text>Fetching data...</Text>;
   }
@@ -39,10 +86,9 @@ const PersonalInfo = (props) => {
   return (
     //Pantalla central...
     <View style={{ flex: 1 }}>
-      <Text>PersonalInfoooo</Text>
       <FlatList
-        data={data.allGrades}
-        renderItem={({ item }) => <GradeItem grade={item} />}
+        data={data.allPersonas}
+        renderItem={({ item }) => <PersonalItem persona={item} />}
         keyExtractor={(item, index) => index}
       />
     </View>

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const GRADE_AUTH = gql`
+export const AUTH_QUERY = gql`
   query Auth {
-    allGrades{
+    allGrades {
       courseName
       gradeFinal
     }
