@@ -19,7 +19,7 @@ const client = new ApolloClient({
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Menu: MenuScreen,
+    Menu: MenuScreen, 
     Setting: SettingScreen,
     PersonalInfo: PersonalInfoScreen,
     AcademicInfo: AcademicInfoScreen,
