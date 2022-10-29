@@ -12,7 +12,7 @@ import GradesScreen from "./screens/GradesScreen";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "http://4ce7-200-118-61-100.ngrok.io/graphql",
+  uri: "http://5bc6-190-60-254-240.ngrok.io/graphql",
   cache: new InMemoryCache(),
 });
 
