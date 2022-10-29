@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -16,27 +16,34 @@ import {
   HeaderButton,
   HeaderButtons,
 } from "react-navigation-header-buttons";
+import * as SecureStore from "expo-secure-store";
 import { AUTH_QUERY } from "../gql/AuthQuery";
+
+const setUSerName = (userName) => {
+  return SecureStore.setItemAsync("user", userName);
+};
+
+const setToken = (token) => {
+  return SecureStore.setItemAsync("secure_token", token);
+};
+
+const getUserName = () => {
+  return SecureStore.getItemAsync("user");
+};
+
+const getToken = () => {
+  return SecureStore.getItemAsync("secure_token");
+};
+
+setToken("");
+setUSerName("");
 
 const Home = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [APItoken, setAPItoken] = useState("");
 
-  const { data, loading } = useMutation(AUTH_QUERY);
-
-  const AuthItem = ({ oToken }) => {
-    const { token } = oToken;
-
-    return (
-      <Pressable>
-        <Text>token: {token}</Text>
-      </Pressable>
-    );
-  };
-
-  if (loading) {
-    return <Text>Fetching data...</Text>;
-  }
+  const [getAPIToken] = useMutation(AUTH_QUERY);
 
   const styles = StyleSheet.create({
     input: {
@@ -74,6 +81,10 @@ const Home = (props) => {
       margin: 15,
     },
   });
+
+  useEffect(() => {
+    //console.log(APItoken);
+  }, [APItoken]);
 
   return (
     <ScrollView>
@@ -138,14 +149,25 @@ const Home = (props) => {
 
           <Pressable //Nos sirve para desestilizar un componente de react
             style={styles.button}
-            onPress={() =>
-              props.navigation.navigate("Menu", { username: username })
-            }
+            //onPress={() =>
+            //props.navigation.navigate("Menu", { username: username })
+            //}
+            onPress={async () => {
+              try {
+                console.log("Haciendo petición...");
+                const a = await getAPIToken();
+                setAPItoken(a.data.createAuth.token);
+                setUSerName(username);
+                setToken(a.data.createAuth.token);
+              } catch (error) {
+                console.log("Upps... Persona no encontrada; \n" + error);
+              }
+              getToken().then((token) => console.log(token));
+              getUserName().then((userName) => console.log(userName));
+            }}
           >
             <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
           </Pressable>
-
-          <Text></Text>
         </View>
       </View>
     </ScrollView>

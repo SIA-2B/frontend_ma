@@ -5038,6 +5038,11 @@
     "commander" "2.20.0"
     "update-check" "1.5.3"
 
+"expo-secure-store@^11.3.0":
+  "integrity" "sha512-k8dw1v7MCHIv7MnAIBXqyqplJo0I5MmRjZXO7bsVPb/BqWvvfBo/JAFdM6K60X6szh+13TWgxwx6GxAkCJVUnQ=="
+  "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-11.3.0.tgz"
+  "version" "11.3.0"
+
 "expo-status-bar@~1.4.0":
   "integrity" "sha512-vh98g8qMIjig/2XTBsoAWS6Vo2dIIwDWjB3/GiuZ9Lazpxc9GO/APfJ4dar7MibzIDUKIrjotrcL6rLdPH13Ew=="
   "resolved" "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.4.0.tgz"

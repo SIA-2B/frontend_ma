@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Text, View, Pressable, StyleSheet } from "react-native";
+import { Text, View, Pressable, StyleSheet, Button } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
 import { PERSONALINFO_QUERY } from "../gql/PersonalInfoQuery";
 
 const PersonalInfo = (props) => {
-
   const [username, setUsername] = useState("");
+
   const { data, loading } = useQuery(PERSONALINFO_QUERY, {
     variables: { user: "developer" },
   });
@@ -57,7 +57,7 @@ const PersonalInfo = (props) => {
         <Text>Fecha de Nacimiento: {fechaNacimiento}</Text>
         <Text>EPS: {EPS}</Text>
         <Text>
-          Grupo Sangüíneo: {grupoSangre} {factorRH}
+          Grupo Sanguíneo: {grupoSangre} {factorRH}
         </Text>
         <Text>Dirección de Residencia: {dirResidencia}</Text>
         <Text>Lugar de Residencia: {lugarResidencia}</Text>
@@ -71,8 +71,6 @@ const PersonalInfo = (props) => {
   if (loading) {
     return <Text>Fetching data...</Text>;
   }
-
-  const styles = StyleSheet.create({});
 
   return (
     <View style={{ flex: 1 }}>
