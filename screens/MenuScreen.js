@@ -28,63 +28,72 @@ const Menu = (props) => {
       borderRadius: 20,
     },
     button: {
-      borderRadius: 10,
-      backgroundColor: "#3c3d3d",
-      marginVertical: 20,
-      color: "white",
+        width: 150,
+        height: 150,
+        borderRadius: 10,
+        backgroundColor: "#76232f",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 8,
+    },
+    row: {
+        maxWidth: '100%',
+        flexDirection: "row",
     },
   });
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text style={{ color: "#000000", fontSize: 20 }}>MENÚ PRINCIPAL</Text>
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() => props.navigation.navigate("AcademicInfo")}
-      >
-        <Text style={{ color: "white", padding: 10 }}>Historia Académica</Text>
-      </Pressable>
+      <View style={styles.row}>
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() => props.navigation.navigate("AcademicInfo")}
+        >
+          <Text style={{ color: "white", padding: 10 }}>Historia Académica</Text>
+        </Pressable>
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() => props.navigation.navigate("Grades")}
+        >
+          <Text style={{ color: "white", padding: 10 }}>Calificaciones</Text>
+        </Pressable>
+      </View>
+      <View style={styles.row}>
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() =>
+            props.navigation.navigate("inscriptions", { username: input })
+          }
+        >
+          <Text style={{ color: "white", padding: 10 }}>Inscripciones</Text>
+        </Pressable>
 
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() => props.navigation.navigate("Grades")}
-      >
-        <Text style={{ color: "white", padding: 10 }}>Calificaciones</Text>
-      </Pressable>
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() =>
+            props.navigation.navigate("courses", { username: input })
+          }
+        >
+          <Text style={{ color: "white", padding: 10 }}>Buscador de Cursos</Text>
+        </Pressable>
+      </View>
+      <View style={styles.row}>
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() =>
+            props.navigation.navigate("financial", { username: input })
+          }
+        >
+          <Text style={{ color: "white", padding: 10 }}>Área Financiera</Text>
+        </Pressable>
 
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() =>
-          props.navigation.navigate("inscriptions", { username: input })
-        }
-      >
-        <Text style={{ color: "white", padding: 10 }}>Inscripciones</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() =>
-          props.navigation.navigate("courses", { username: input })
-        }
-      >
-        <Text style={{ color: "white", padding: 10 }}>Buscador de Cursos</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() =>
-          props.navigation.navigate("financial", { username: input })
-        }
-      >
-        <Text style={{ color: "white", padding: 10 }}>Área Financiera</Text>
-      </Pressable>
-
-      <Pressable //Nos sirve para desestilizar un componente de react
-        style={styles.button}
-        onPress={() => props.navigation.navigate("Grades")}
-      >
-        <Text style={{ color: "white", padding: 10 }}>Calificaciones</Text>
-      </Pressable>
+        <Pressable //Nos sirve para desestilizar un componente de react
+          style={styles.button}
+          onPress={() => props.navigation.navigate("Grades")}
+        >
+          <Text style={{ color: "white", padding: 10 }}>Calificaciones</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
