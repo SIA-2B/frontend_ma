@@ -1,11 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GRADE_QUERY = gql`
-  query GradeQuery($studentId: Integer!) {
-    allGradesByStudent(studentId: $studentId){
-      courseName
-      gradeFinal
-      gradePeriod
-    }
+{
+  allGradesByStudent(id: 10){
+    studentId
+    courseId
+    courseName
+    gradeFinal
+    gradePeriod
   }
+}
 `;
