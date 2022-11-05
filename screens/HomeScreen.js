@@ -7,6 +7,8 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation } from "@apollo/client";
@@ -19,7 +21,7 @@ import {
 import * as SecureStore from "expo-secure-store";
 import { AUTH_QUERY } from "../gql/AuthQuery";
 
-const setUSerName = (userName) => {
+const setUserName = (userName) => {
   return SecureStore.setItemAsync("user", userName);
 };
 
@@ -35,15 +37,18 @@ const getToken = () => {
   return SecureStore.getItemAsync("secure_token");
 };
 
-setToken("");
-setUSerName("");
-
 const Home = (props) => {
+  setUserName("");
+  setToken("");
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [APItoken, setAPItoken] = useState("");
 
   const [getAPIToken] = useMutation(AUTH_QUERY);
+
+  const state = {
+    isLoading: false,
+  };
 
   const styles = StyleSheet.create({
     input: {
@@ -82,10 +87,6 @@ const Home = (props) => {
     },
   });
 
-  useEffect(() => {
-    //console.log(APItoken);
-  }, [APItoken]);
-
   return (
     <ScrollView>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -100,7 +101,7 @@ const Home = (props) => {
           <Image
             style={{
               marginHorizontal: 40,
-              marginVertical: 40,
+              marginTop: 30,
             }}
             source={logoUnal}
           />
@@ -108,7 +109,8 @@ const Home = (props) => {
             style={{
               color: "white",
               textAlign: "center",
-              marginVertical: 20,
+              marginTop: 30,
+              marginBottom: 30,
               marginHorizontal: 30,
               fontSize: 26,
             }}
@@ -149,25 +151,31 @@ const Home = (props) => {
 
           <Pressable //Nos sirve para desestilizar un componente de react
             style={styles.button}
-            //onPress={() =>
-            //props.navigation.navigate("Menu", { username: username })
-            //}
-            onPress={async () => {
+            onPress={async (e) => {
               try {
-                console.log("Haciendo petición...");
-                const a = await getAPIToken();
-                setAPItoken(a.data.createAuth.token);
-                setUSerName(username);
+                console.log("\nHaciendo petición...");
+
+                const a = await getAPIToken({
+                  variables: { username: username, password: password },
+                });
+
+                setUserName(username);
                 setToken(a.data.createAuth.token);
+
+                getUserName().then((userName) => console.log(userName));
+                getToken().then((token) => console.log(token));
+
+                state.isLoading = false;
               } catch (error) {
                 console.log("Upps... Persona no encontrada; \n" + error);
               }
-              getToken().then((token) => console.log(token));
-              getUserName().then((userName) => console.log(userName));
             }}
           >
             <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
           </Pressable>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            {state.isLoading && <ActivityIndicator color={"#76232f"} />}
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -205,7 +213,7 @@ Home.navigationOptions = (navData) => {
 
         <Item
           title="Setting"
-          iconName="ios-settings-outline"
+          iconName="exit-outline"
           onPress={() => navData.navigation.navigate("Setting")}
         />
       </HeaderButtons>

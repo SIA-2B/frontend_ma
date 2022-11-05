@@ -1,16 +1,66 @@
 import React, { useState } from "react";
 import { Text, View, Pressable, StyleSheet, Button } from "react-native";
-
+import * as SecureStore from "expo-secure-store";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
 import { PERSONALINFO_QUERY } from "../gql/PersonalInfoQuery";
 
 const PersonalInfo = (props) => {
-  const [username, setUsername] = useState("");
+  const getData = async () => {
+    let u;
+    try {
+      SecureStore.getItemAsync("user").then((userName) => {
+        setUsername(userName);
+        u = userName;
+        //console.log("username: " + username);
+      });
+      return u;
+    } catch (e) {
+      console.log(e);
+      return (u = false);
+    }
+  };
+
+  const [username, setUsername] = useState(getData());
+  const { navigation } = props;
 
   const { data, loading } = useQuery(PERSONALINFO_QUERY, {
-    variables: { user: "developer" },
+    variables: { user: username },
   });
+
+  function consultaPersonaByUser() {
+    try {
+      return data.personaByUsername;
+    } catch (error) {
+      console.log("\nPersona no encontrada...");
+      //console.log(error);
+      const a = {
+        idPersona: 0,
+        nombrePersona: "null",
+        apellidoPersona: "null",
+        tipoDocumento: "null",
+        NUIPPersona: "null",
+        usernamePersona: "null",
+        lugarNacimiento: "null",
+        estadoCivil: "null",
+        sexoBio: "null",
+        etnia: "null",
+        correoPersonal: "null",
+        telefonoMovil: "null",
+        telefonoFijo: "null",
+        fechaNacimiento: "null",
+        EPS: "null",
+        grupoSangre: "null",
+        factorRH: "null",
+        dirResidencia: "null",
+        lugarResidencia: "null",
+        estratoSocioeconomico: "null",
+        libretaMilitar: "null",
+        estadoPersona: "null",
+      };
+      return a;
+    }
+  }
 
   const PersonalItem = ({ persona }) => {
     const {
@@ -75,7 +125,7 @@ const PersonalInfo = (props) => {
   return (
     <View style={{ flex: 1 }}>
       <Text>
-        <PersonalItem persona={data.personaByUsername} />
+        <PersonalItem persona={consultaPersonaByUser()} />
       </Text>
     </View>
   );

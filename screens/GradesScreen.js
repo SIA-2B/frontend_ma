@@ -9,7 +9,8 @@ import {
   StyleSheet,
   SafeAreaView,
   StatusBar,
-  ScrollView
+  ScrollView,
+  SecureStore
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -17,32 +18,51 @@ import { useQuery } from "@apollo/client";
 import { GRADE_QUERY } from "../gql/GradesQuery";
 
 const Grades = (props) => {
-  const { data, loading } = useQuery(GRADE_QUERY); //execute query
+  const getData = async () => {
+    let u;
+    try {
+      SecureStore.getItemAsync("user").then((userName) => {
+        setUsername(userName);
+        u = userName;
+        //console.log("username: " + username);
+      });
+      return u;
+    } catch (e) {
+      console.log(e);
+      return (u = false);
+    }
+  };
+
+  const [username, setUsername] = useState(getData());
+
+  const { data, loading } = useQuery(GRADE_QUERY, {
+    variables: { id: 10 },
+  }); //execute query
 
   const GradeItem = ({ grade }) => {
     const { courseName, gradeFinal, gradePeriod } = grade; //get the name of continent
     return (
       <View style={styles.item}>
-        <Text style={styles.title}>Nombre:    {courseName}</Text>
-        <Text style={styles.title}>Calificación:    {gradeFinal}</Text>
-        <Text style={styles.title}>Periodo:   {gradePeriod}</Text>
+        <Text style={styles.title}>Nombre: {courseName}</Text>
+        <Text style={styles.title}>Calificación: {gradeFinal}</Text>
+        <Text style={styles.title}>Periodo: {gradePeriod}</Text>
       </View>
     );
   };
 
   if (loading) {
-    return <Text>Fetching data...</Text> //while loading return this
+    return <Text>Fetching data...</Text>; //while loading return this
   }
-    return (
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          data={data.allGradesByStudent}
-          renderItem={({ item }) => <GradeItem grade={item} />}
-          keyExtractor={(item, index) => index}
-        />
-      </SafeAreaView>
-    );
-};
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={data.allGradesByStudent}
+        renderItem={({ item }) => <GradeItem grade={item} />}
+        keyExtractor={(item, index) => index}
+      />
+    </SafeAreaView>
+  );
+};;;
 
 Grades.navigationOptions = (navData) => {
   return {
