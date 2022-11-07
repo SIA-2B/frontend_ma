@@ -46,10 +46,6 @@ const Home = (props) => {
 
   const [getAPIToken] = useMutation(AUTH_QUERY);
 
-  const state = {
-    isLoading: false,
-  };
-
   const styles = StyleSheet.create({
     input: {
       height: 40,
@@ -164,8 +160,6 @@ const Home = (props) => {
 
                 getUserName().then((userName) => console.log(userName));
                 getToken().then((token) => console.log(token));
-
-                state.isLoading = false;
               } catch (error) {
                 console.log("Upps... Persona no encontrada; \n" + error);
               }
@@ -174,7 +168,7 @@ const Home = (props) => {
             <Text style={{ color: "white", padding: 10 }}>Ingresar</Text>
           </Pressable>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            {state.isLoading && <ActivityIndicator color={"#76232f"} />}
+            {false && <ActivityIndicator size="large" color={"#76232f"} />}
           </View>
         </View>
       </View>
