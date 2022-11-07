@@ -169,8 +169,8 @@ const Home = (props) => {
                 setUserName(username);
 
                 /*let id = getUserData.personaByUsername;
-                setIDUser(id.toString());
-                setToken(a.data.createAuth.token);*/
+                setIDUser(id.toString());*/
+                setToken(a.data.createAuth.token);
 
                 getUserName().then((userName) => console.log(userName));
                 getToken().then((token) => console.log(token));
