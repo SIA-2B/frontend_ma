@@ -3,7 +3,7 @@ import { Text, View, Pressable, StyleSheet, Button } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@apollo/client";
-import { PERSONALINFO_QUERY } from "../gql/PersonalInfoQuery";
+import { PERSONALINFO_QUERY } from "../gql/PersonalInfoUserAllQuery";
 
 const PersonalInfo = (props) => {
   const getData = async () => {
