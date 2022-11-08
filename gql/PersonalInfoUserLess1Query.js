@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const PERSONALINFO_QUERY = gql`
-  query Personas($user: String!) {
+export const PERSONALINFO_QUERY_LESS = gql`
+  query PersonasUserID($user: String!) {
     personaByUsername(username: $user) {
       idPersona
       nombrePersona

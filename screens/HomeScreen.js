@@ -8,7 +8,6 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation } from "@apollo/client";
@@ -20,14 +19,9 @@ import {
 } from "react-navigation-header-buttons";
 import * as SecureStore from "expo-secure-store";
 import { AUTH_QUERY } from "../gql/AuthQuery";
-import { PERSONALINFO_QUERY } from "../gql/PersonalInfoUserLess1Query";
 
 const setUserName = (userName) => {
   return SecureStore.setItemAsync("user", userName);
-};
-
-const setIDUser = (id) => {
-  return SecureStore.setItemAsync("id_user", id);
 };
 
 const setToken = (token) => {
@@ -38,23 +32,14 @@ const getUserName = () => {
   return SecureStore.getItemAsync("user");
 };
 
-const getIDUser = () => {
-  return SecureStore.getItemAsync("id_user");
-};
-
 const getToken = () => {
   return SecureStore.getItemAsync("secure_token");
 };
 
 const Home = (props) => {
-  setUserName("");
-  setToken("");
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { getUserData, loading } = useQuery(PERSONALINFO_QUERY, {
-    variables: { user: username },
-  });
+
   const [getAPIToken] = useMutation(AUTH_QUERY);
 
   const styles = StyleSheet.create({
@@ -167,16 +152,12 @@ const Home = (props) => {
                 });
 
                 setUserName(username);
-
-                /*let id = getUserData.personaByUsername;
-                setIDUser(id.toString());*/
                 setToken(a.data.createAuth.token);
 
                 getUserName().then((userName) => console.log(userName));
                 getToken().then((token) => console.log(token));
-                getIDUser().then((id) => console.log(parseInt(id)));
               } catch (error) {
-                console.log("Upps... Persona no encontrada; \n" + error);
+                console.log("Upps... Error en autenticación; \n" + error);
               }
             }}
           >
@@ -189,7 +170,7 @@ const Home = (props) => {
       </View>
     </ScrollView>
   );
-};
+};;
 
 const HeaderButtonComponent = (props) => (
   <HeaderButton
